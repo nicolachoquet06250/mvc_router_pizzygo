@@ -1,0 +1,162 @@
+.loader {
+	position : fixed;
+	z-index: 9999;
+	background : url('../../img/loader.gif') 50% 50% no-repeat;
+	top : 0px;
+	left : 0px;
+	height : 100%;
+	width : 100%;
+	cursor : wait;
+}
+
+.loader-container {
+	position: fixed;
+	z-index: 9999;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: white;
+	cursor : wait;
+}
+
+.pizzygo-switch label input[type=checkbox]:checked+.lever:after {
+	background-color: orange !important;
+}
+.pizzygo-switch label input[type=checkbox]:checked+.lever {
+	background-color: orange !important;
+}
+
+.pizzygo-bold {
+	font-weight: bold;
+}
+.pizzygo-italic {
+	font-style: italic;
+}
+.pizzygo-underline {
+	text-decoration: underline;
+}
+.pizzygo-muted {
+	color: gray;
+	font-weight:300;
+}
+
+.pizzygo-basic-link {
+	color:orange;
+}
+.pizzygo-basic-link:hover {
+	color: gray;
+	font-weight: 300;
+}
+.pizzygo-dropdown {
+	position: absolute;
+	margin-top: 70px;
+	background: white;
+	display: none;
+	min-width: 200px;
+}
+.pizzygo-dropdown.show {
+	display: block;
+}
+.pizzygo-dropdown.hide {
+	display: none;
+}
+.pizzygo-dropdown li {
+	display: block;
+	list-style: none;
+	padding: 5px;
+}
+.pizzygo-dropdown li .material-icons {
+	margin-right: 5px;
+}
+.pizzygo-dropdown li.divider {
+	padding: 0;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.pizzygo-badge {
+	width: 20px;
+	height: 20px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.pizzygo-global-menu {
+	background: white;
+}
+.pizzygo-logo {
+	height: 45px;
+	margin-top: 10px;
+}
+.pizzygo-over-parallax {
+	width: 100%;
+	height: 100%;
+}
+.pizzygo-title {
+	font-size: 50px;
+}
+.pizzygo-title__notre-mission {
+	font-size: 30px;
+}
+.pizzygo-subtitle {
+	font-size: 20px;
+}
+.pizzygo-subtitle__notre-mission {
+	font-size: 15px;
+}
+.pizzygo-home-top-space {
+	height: 100px;
+}
+.pizzygo-home-top-space-2 {
+	height: 80px;
+}
+.pizzygo-social-network-icon {
+	font-size: 15px;
+}
+.pizzygo-dashboard-pseudo {
+	height: 50px;
+}
+.pizzygo-dashboard-pseudo-link:hover {
+	background: transparent;
+}
+
+.pizzygo-dashboard-title {
+	font-size: 40px;
+}
+
+.tabs .tab a{
+	color: orange;
+}
+
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+	background: transparent!important;
+}
+
+.tabs .tab a:hover,.tabs .tab a.active {
+	background: transparent;
+	color: orange;
+}
+.tabs .indicator {
+	background: orange;
+}
+
+
+#pizzygo-search_motor {
+	margin-top: 3px;
+	padding-left: 4px;
+	color: white;
+}
+#pizzygo-search_motor:focus {
+	background: transparent;
+}
+
+#pizzygo-home, #pizzygo-dashboard, #pizzygo-notre-mission {
+	background-image: url(https://pizzygo.fr/wp-content/themes/foodpicky/images/foodpicky/body-pattern.jpg);
+}
+
+.p__notre-mission {
+	font-size: 20px;
+}
