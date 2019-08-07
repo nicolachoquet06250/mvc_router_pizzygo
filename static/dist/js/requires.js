@@ -8,7 +8,7 @@ let CONSTANT = {
 		VENDOR: 3
 	},
 	urls: {
-		ws: '/api/index.php',
+		ws: '/api',
 		api_addresses: 'api-adresse.data.gouv.fr/search/'
 	}
 };

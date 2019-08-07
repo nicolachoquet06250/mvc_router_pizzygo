@@ -21,6 +21,11 @@
 			'class' => 'mvc_router\mvc\controllers\pizzygo\backoffice\Translations',
 			'name' => 'translations_backoffice_pizzygo_controller',
 			'file' => __DIR__.'/classes/mvc/controllers/site/backoffice/Translations.php'
+		],
+		[
+			'class' => 'mvc_router\mvc\controllers\pizzygo\api\Account',
+			'name' => 'account_api_pizzygo_controller',
+			'file' => __DIR__.'/classes/mvc/controllers/api/Account.php'
 		]
 	);
 

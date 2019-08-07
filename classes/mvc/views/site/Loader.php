@@ -18,10 +18,4 @@ class Loader extends View {
             <div class="loader"></div>
         </div>';
 	}
-
-	public function loader_js() {
-		return '<script>
-	$(document).ready(() => $(".loader-container").fadeOut("1000", () => console.log(`## PIZZYGO PAGE LOADED ##`)));
-</script>';
-	}
 }

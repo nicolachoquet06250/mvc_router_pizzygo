@@ -191,6 +191,7 @@ class Home extends Loader {
             <link rel=\"icon\" href=\"{$this->get('logo')}\" />
             <link rel=\"apple-touch-icon\" href=\"{$this->get('logo')}\" />
             <link rel=\"apple-touch-icon-precomposed\" href=\"{$this->get('logo')}\" />
+            {$this->css()}
 			<title>{$this->get('title')}</title>
 		</head>
 		<body>
@@ -210,7 +211,25 @@ class Home extends Loader {
 
 	public function js() {
 		return "
-		<script src='/static/dist/js/index.js'></script>"
-			   .$this->loader_js();
+		<script src='/static/dist/js/libs/ChartJS/Chart.min.js'></script>
+		<script src='/static/dist/js/classes/Login.js'></script>
+		<script src='/static/dist/js/classes/Addresses.js'></script>
+		<script src='/static/dist/js/classes/Roles.js'></script>
+		<script src='/static/dist/js/classes/OrderDetails.js'></script>
+		<script src='/static/dist/js/classes/CategoriesVariants.js'></script>
+		<script src='/static/dist/js/classes/RolesEnum.js'></script>
+		<script src='/static/dist/js/classes/OrderStatus.js'></script>
+		<script src='/static/dist/js/classes/UserPhones.js'></script>
+		<script src='/static/dist/js/classes/UserEmails.js'></script>
+		<script src='/static/dist/js/classes/User.js'></script>
+		<script src='/static/dist/js/classes/Users.js'></script>
+		<script src='/static/dist/js/classes/ProductCategory.js'></script>
+		<script src='/static/dist/js/classes/ProductCategories.js'></script>
+		<script src='/static/dist/js/classes/Product.js'></script>
+		<script src='/static/dist/js/classes/Products.js'></script>
+		<script src='/static/dist/js/classes/Order.js'></script>
+		<script src='/static/dist/js/classes/Orders.js'></script>
+		<script src='/static/dist/js/requires.js'></script>
+		<script src='/static/dist/js/index.js'></script>";
 	}
 }

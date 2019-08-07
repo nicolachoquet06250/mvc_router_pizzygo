@@ -1,39 +1,7 @@
 'use strict';
 $(document).ready(() => {
 	let files_requires = {
-		index: [
-			'static/dist/libs/ChartJs/Chart.min.js',
-
-			'static/dist/js/classes/Login.js',
-
-			'static/dist/js/classes/Factories/Addresses.js',
-
-			'static/dist/js/classes/Factories/Roles.js',
-
-			'static/dist/js/classes/Factories/OrderDetails.js',
-
-			'static/dist/js/classes/Factories/CategoriesVariants.js',
-
-			'static/dist/js/classes/Enums/RolesEnum.js',
-			'static/dist/js/classes/Enums/OrderStatus.js',
-
-			'static/dist/js/classes/Factories/UserPhones.js',
-			'static/dist/js/classes/Factories/UserEmails.js',
-
-			'static/dist/js/classes/Entities/User.js',
-			'static/dist/js/classes/Factories/Users.js',
-
-			'static/dist/js/classes/Entities/ProductCategory.js',
-			'static/dist/js/classes/Factories/ProductCategories.js',
-
-			'static/dist/js/classes/Entities/Product.js',
-			'static/dist/js/classes/Factories/Products.js',
-
-			'static/dist/js/classes/Entities/Order.js',
-			'static/dist/js/classes/Factories/Orders.js',
-
-			'static/dist/js/pizzygo/requires.js'
-		],
+		index: [],
 		vendor: [
 			'../static/dist/libs/ChartJs/Chart.min.js',
 
@@ -105,7 +73,7 @@ $(document).ready(() => {
 
 	let page = window.location.href.split('/')[window.location.href.split('/').length-1]
 		.split('.')[0];
-	if(page === '' || page === '#') page = 'index';
+	if(page === '' || page === '#' || page === 'home') page = 'index';
 	if(files_requires[page] !== undefined) {
 		for(let i in files_requires[page]) {
 			$('head').append(`<script src="${files_requires[page][i]}"></script>`)
