@@ -26,6 +26,11 @@
 			'class' => 'mvc_router\mvc\controllers\pizzygo\api\Account',
 			'name' => 'account_api_pizzygo_controller',
 			'file' => __DIR__.'/classes/mvc/controllers/api/Account.php'
+		],
+		[
+			'class' => 'mvc_router\mvc\controllers\pizzygo\OurMission',
+			'name' => 'our_mission_pizzygo_controller',
+			'file' => __DIR__.'/classes/mvc/controllers/site/OurMission.php'
 		]
 	);
 
@@ -42,6 +47,11 @@
 	Dependency::add_custom_dependency('mvc_router\mvc\views\pizzygo\backoffice\Translations',
 									  'translations_backoffice_pizzygo_view',
 									  __DIR__.'/classes/mvc/views/site/backoffice/Translations.php',
+									  'mvc_router\mvc\View');
+
+	Dependency::add_custom_dependency('mvc_router\mvc\views\pizzygo\OurMission',
+									  'our_mission_pizzygo_view',
+									  __DIR__.'/classes/mvc/views/site/OurMission.php',
 									  'mvc_router\mvc\View');
 	
 	// parameters are arrays

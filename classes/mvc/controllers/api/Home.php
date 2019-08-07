@@ -12,7 +12,7 @@ class Home extends Controller {
 	 * @param \mvc_router\mvc\views\pizzygo\api\Home $view
 	 * @return \mvc_router\mvc\views\pizzygo\api\Home
 	 */
-	public function index(\mvc_router\mvc\views\pizzygo\api\Home $view) {
+	public function index(\mvc_router\mvc\views\pizzygo\api\Home $view): \mvc_router\mvc\views\pizzygo\api\Home {
 		$view->assign('title', 'Pizzygo');
 		return $view;
 	}

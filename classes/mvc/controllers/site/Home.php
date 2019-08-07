@@ -12,7 +12,7 @@ class Home extends Controller {
 	 * @param \mvc_router\mvc\views\pizzygo\Home $view
 	 * @return \mvc_router\mvc\views\pizzygo\Home
 	 */
-	public function index(\mvc_router\mvc\views\pizzygo\Home $view) {
+	public function index(\mvc_router\mvc\views\pizzygo\Home $view): \mvc_router\mvc\views\pizzygo\Home {
 		$view->assign('title-h1', 'TROUVE UNE PIZZA PRÈS DE CHEZ TOI');
 		$view->assign('title', 'PizzyGo - Une pizza près de chez moi');
 		$view->assign('logo', 'https://pizzygo.fr/wp-content/uploads/2018/11/logoLAST.png');

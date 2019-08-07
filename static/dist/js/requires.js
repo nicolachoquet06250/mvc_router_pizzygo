@@ -15,10 +15,10 @@ let CONSTANT = {
 let callbacks = {
 	disconnect: (disconnected, current_page) => {
 		if(disconnected) {
-			$('#pizzygo-menu-bar').html(`<li><a class="black-text" href="notre-mission.html">La mission de PizzyGo</a></li>
+			$('#pizzygo-menu-bar').html(`<li><a class="black-text" href="/notre-mission">La mission de PizzyGo</a></li>
                     <li><a class="black-text modal-trigger" id="connect-modal-link" href="#pizzygo-modal-connection">Connexion</a></li>
                     <li><a class="black-text modal-trigger" id="inscription-modal-link" href="#pizzygo-modal-connection">S'inscrire</a></li>`);
-			$('#pizzygo-mobile-menu').html(`<li><a class="white-text" href="notre-mission.html">La mission de PizzyGo</a></li>
+			$('#pizzygo-mobile-menu').html(`<li><a class="white-text" href="notre-mission">La mission de PizzyGo</a></li>
                         <li><a class="white-text modal-trigger" id="connect-modal-link" href="#pizzygo-modal-connection">Connexion</a></li>`);
 			if(current_page !== 'index') {
 				window.location.href = '/';
@@ -57,7 +57,7 @@ let callbacks = {
                             </a>
                         </li>` : '';
 			html += `<li>
-                            <a class="black-text" href="/notre-mission.html">La mission de PizzyGo</a>
+                            <a class="black-text" href="/notre-mission">La mission de PizzyGo</a>
                         </li>
                         <li>
                             <div style="width: 310px;" class="card grey lighten-5 z-depth-1">
@@ -88,7 +88,7 @@ let callbacks = {
 				target += '-mobile';
 			}
 			let mobile_html = `<li>
-                            <a class="white-text" href="/notre-mission.html">La mission de PizzyGo</a>
+                            <a class="white-text" href="/notre-mission">La mission de PizzyGo</a>
                         </li>
                         <li>
                             <div style="width: 310px;" class="card grey lighten-5 z-depth-1">
@@ -1060,10 +1060,10 @@ let active_window_index = object => {
 	Login.logged(logged => {
 		if(logged) Login.get_connected_user((status, user) => callbacks.pizzygo_login(status, user, 'index'));
 		else {
-			$('#pizzygo-menu-bar').html(`<li><a class="black-text" href="notre-mission.html">La mission de PizzyGo</a></li>
+			$('#pizzygo-menu-bar').html(`<li><a class="black-text" href="/notre-mission">La mission de PizzyGo</a></li>
                         <li><a class="black-text modal-trigger" id="connect-modal-link" href="#pizzygo-modal-connection">Connexion</a></li>
                         <li><a class="black-text modal-trigger" id="inscription-modal-link" href="#pizzygo-modal-connection">S'inscrire</a></li>`);
-			$('#pizzygo-mobile-menu').html(`<li><a class="white-text" href="notre-mission.html">La mission de PizzyGo</a></li>
+			$('#pizzygo-mobile-menu').html(`<li><a class="white-text" href="notre-mission">La mission de PizzyGo</a></li>
                         <li><a class="white-text modal-trigger" id="connect-modal-link" href="#pizzygo-modal-connection">Connexion</a></li>`);
 			materialize.components.init(object.modals.get.all_windows(
 				'pizzygo-modal-connection',
