@@ -179,13 +179,16 @@ class Home extends Loader {
 
 	public function render(): string {
 		$this->header();
-		$logo_link = $this->get('logo');
+
+		$logo = $this->get('logo');
 
 		return "<!Doctype html>
 	<html lang='{$this->translate->get_default_language()}'>
 		<head>
 			{$this->materializeCssV1Top()}
-			{$this->logo($logo_link)}
+			<link rel='icon' href='{$logo}' />
+            <link rel='apple-touch-icon' href='{$logo}' />
+            <link rel='apple-touch-icon-precomposed' href='{$this}' />
             {$this->css()}
 			<title>{$this->get('title')}</title>
 		</head>
