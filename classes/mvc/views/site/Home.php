@@ -179,12 +179,13 @@ class Home extends Loader {
 
 	public function render(): string {
 		$this->header();
+		$logo_link = $this->get('logo');
 
 		return "<!Doctype html>
 	<html lang='{$this->translate->get_default_language()}'>
 		<head>
 			{$this->materializeCssV1Top()}
-			{$this->logo($this->get('logo'))}
+			{$this->logo($logo_link)}
             {$this->css()}
 			<title>{$this->get('title')}</title>
 		</head>
