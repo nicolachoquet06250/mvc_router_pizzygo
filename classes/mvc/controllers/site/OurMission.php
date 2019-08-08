@@ -14,6 +14,7 @@ class OurMission extends Controller {
 	 */
 	public function index(\mvc_router\mvc\views\pizzygo\OurMission $view): \mvc_router\mvc\views\pizzygo\OurMission {
 		$view->assign('title', 'Pizzygo | Notre Mission');
+		$view->assign('logo', 'https://pizzygo.fr/wp-content/uploads/2018/11/logoLAST.png');
 		return $view;
 	}
 }

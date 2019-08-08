@@ -4,10 +4,6 @@
 namespace mvc_router\mvc\views\pizzygo;
 
 
-use mvc_router\mvc\View;
-
-require_once __DIR__.'/Loader.php';
-
 class Home extends Loader {
 	protected function pizzygo_body() {
 		$title = strtoupper($this->get('title-h1'));
@@ -188,9 +184,7 @@ class Home extends Loader {
 	<html lang='{$this->translate->get_default_language()}'>
 		<head>
 			{$this->materializeCssV1Top()}
-            <link rel=\"icon\" href=\"{$this->get('logo')}\" />
-            <link rel=\"apple-touch-icon\" href=\"{$this->get('logo')}\" />
-            <link rel=\"apple-touch-icon-precomposed\" href=\"{$this->get('logo')}\" />
+			{$this->logo($this->get('logo'))}
             {$this->css()}
 			<title>{$this->get('title')}</title>
 		</head>

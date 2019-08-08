@@ -18,4 +18,10 @@ class Loader extends View {
             <div class="loader"></div>
         </div>';
 	}
+
+	public function logo($logo) {
+		return " <link rel='icon' href='{$logo}' />
+            <link rel='apple-touch-icon' href='{$logo}' />
+            <link rel='apple-touch-icon-precomposed' href='{$this}' />";
+	}
 }

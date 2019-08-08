@@ -5,7 +5,8 @@
 
 	require_once __DIR__.'/../autoload.php';
 
-	Dependency::extend_dependency('mvc_router\services\FileGeneration', 'mvc_router\services\core\FileFeneration', [
+	Dependency::extend_dependency('mvc_router\services\FileGeneration',
+								  'mvc_router\services\core\FileGeneration', [
 		'name' => 'service_generation',
 		'file' => __DIR__.'/services/FileGeneration.php',
 		'type' => Dependency::NONE,
@@ -40,6 +41,11 @@
 		]
 	);
 
+	Dependency::add_custom_dependency('mvc_router\mvc\views\pizzygo\Loader',
+									  'loader_pizzygo_view',
+									  __DIR__.'/classes/mvc/views/site/Loader.php',
+									  'mvc_router\mvc\View');
+
 	Dependency::add_custom_dependency('mvc_router\mvc\views\pizzygo\Home',
 									  'home_pizzygo_view',
 									  __DIR__.'/classes/mvc/views/site/Home.php',
@@ -59,6 +65,8 @@
 									  'our_mission_pizzygo_view',
 									  __DIR__.'/classes/mvc/views/site/OurMission.php',
 									  'mvc_router\mvc\View');
+
+
 	
 	// parameters are arrays
 	Conf::extend_confs();
