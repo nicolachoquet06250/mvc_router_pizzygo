@@ -5,6 +5,12 @@
 
 	require_once __DIR__.'/../autoload.php';
 
+	Dependency::extend_dependency('mvc_router\services\FileGeneration', 'mvc_router\services\core\FileFeneration', [
+		'name' => 'service_generation',
+		'file' => __DIR__.'/services/FileGeneration.php',
+		'type' => Dependency::NONE,
+	]);
+
 	// parameters are arrays
 	Dependency::add_custom_controllers(
 		[
