@@ -69,4 +69,13 @@
 
 	
 	// parameters are arrays
-	Conf::extend_confs();
+	Conf::extend_confs(
+		[
+			'class' => [
+				'old' => 'mvc_router\confs\Mysql',
+				'new' => 'mvc_router\confs\pizzygo\Mysql'
+			],
+			'name' => 'mysql',
+			'file' => __DIR__.'/classes/confs/Mysql.php',
+		]
+	);
