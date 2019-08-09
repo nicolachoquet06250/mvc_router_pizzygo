@@ -17,7 +17,13 @@ class Home extends Controller {
 	public function index(\mvc_router\mvc\views\pizzygo\Home $view, Trigger $triggers): \mvc_router\mvc\views\pizzygo\Home {
 		$view->assign('title-h1', 'TROUVE UNE PIZZA PRÈS DE CHEZ TOI');
 		$view->assign('title', 'PizzyGo - Une pizza près de chez moi');
-		$view->assign('logo', 'https://pizzygo.fr/wp-content/uploads/2018/11/logoLAST.png');
+		$logo_base = 'https://pizzygo.fr/wp-content/uploads/2018/11/cropped-favicon-1-';
+		$view->assign('logo', [
+			'32x32' => $logo_base.'32x32.png',
+			'180x180' => $logo_base.'180x180.png',
+			'192x192' => $logo_base.'192x192.png',
+			'270x270' => $logo_base.'270x270.png',
+		]);
 		return $view;
 	}
 }

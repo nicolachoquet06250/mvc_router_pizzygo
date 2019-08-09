@@ -12,9 +12,7 @@ class OurMission extends Loader {
 <html lang='{$this->translate->get_default_language()}'>
 	<head>
 		{$this->materializeCssV1Top()}
-			<link rel='icon' href='{$logo}' />
-            <link rel='apple-touch-icon' href='{$logo}' />
-            <link rel='apple-touch-icon-precomposed' href='{$this}' />
+		{$this->logo($logo)}
 		<title>{$this->get('title')}</title>
 	</head>
 	<body>
