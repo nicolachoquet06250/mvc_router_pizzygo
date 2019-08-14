@@ -66,6 +66,16 @@
 									  __DIR__.'/classes/mvc/views/site/OurMission.php',
 									  'mvc_router\mvc\View');
 
+	Dependency::add_custom_dependency('mvc_router\data\gesture\pizzygo\managers\User',
+									  'pizzygo_user_manager',
+										__DIR__.'/classes/datas/managers/User.php',
+									  'mvc_router\data\gesture\Manager');
+
+	Dependency::add_custom_dependency('mvc_router\data\gesture\pizzygo\entities\User',
+									  'pizzygo_user_entity',
+									  __DIR__.'/classes/datas/entities/User.php',
+									  'mvc_router\data\gesture\Entity');
+
 
 	
 	// parameters are arrays
