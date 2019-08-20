@@ -10,85 +10,85 @@ class User extends Entity {
 	/**
 	 * @var int $id
 	 */
-	public $id;
+	protected $id;
 
 	/**
 	 * @var int $fb_id
 	 */
-	public $fb_id;
+	protected $fb_id;
 
 	/**
 	 * @var string $address
 	 */
-	public $address;
+	protected $address;
 
 	/**
 	 * @var string $email
 	 */
-	public $email;
+	protected $email;
 
 	/**
 	 * @var string $phone
 	 */
-	public $phone;
+	protected $phone;
 
 	/**
 	 * @var string $password
 	 */
-	public $password;
+	protected $password;
 
 	/**
 	 * @var string $description
 	 */
-	public $description;
+	protected $description;
 
 	/**
 	 * @var string $profil_img
 	 */
-	public $profil_img;
+	protected $profil_img;
 
 	/**
 	 * @var bool $premium
 	 */
-	public $premium;
+	protected $premium;
 
 	/**
 	 * @var bool $active
 	 */
-	public $active;
+	protected $active;
 
 	/**
 	 * @var string $activate_token
 	 */
-	public $activate_token;
+	protected $activate_token;
 
 	/**
 	 * @var string $website
 	 */
-	public $website;
+	protected $website;
 
 	/**
 	 * @var string $pseudo
 	 */
-	public $pseudo;
+	protected $pseudo;
 
 	/**
 	 * @var string $first_name
 	 */
-	public $first_name;
+	protected $first_name;
 
 	/**
 	 * @var string $last_name
 	 */
-	public $last_name;
+	protected $last_name;
 
 	/**
 	 * @var string $fb_access_token
 	 */
-	public $fb_access_token;
+	protected $fb_access_token;
 
 	/**
 	 * @var string $local_access_token
 	 */
-	public $local_access_token;
+	protected $local_access_token;
 }
