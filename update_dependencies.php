@@ -76,6 +76,11 @@
 									  __DIR__.'/classes/datas/entities/User.php',
 									  'mvc_router\data\gesture\Entity');
 
+	Dependency::add_custom_dependency('mvc_router\services\Password',
+									  'service_password',
+										__DIR__.'/classes/services/Password.php',
+									  'mvc_router\services\Service');
+
 
 	
 	// parameters are arrays
