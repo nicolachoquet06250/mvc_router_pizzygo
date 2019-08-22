@@ -41,47 +41,57 @@
 		]
 	);
 
-	Dependency::add_custom_dependency('mvc_router\mvc\views\pizzygo\Loader',
-									  'loader_pizzygo_view',
-									  __DIR__.'/classes/mvc/views/site/Loader.php',
-									  'mvc_router\mvc\View');
-
-	Dependency::add_custom_dependency('mvc_router\mvc\views\pizzygo\Home',
-									  'home_pizzygo_view',
-									  __DIR__.'/classes/mvc/views/site/Home.php',
-									  'mvc_router\mvc\View');
-
-	Dependency::add_custom_dependency('mvc_router\mvc\views\pizzygo\api\Home',
-									  'home_pizzygo_api_view',
-								  	__DIR__.'/classes/mvc/views/api/Home.php',
-								  	'mvc_router\mvc\View');
-
-	Dependency::add_custom_dependency('mvc_router\mvc\views\pizzygo\backoffice\Translations',
-									  'translations_backoffice_pizzygo_view',
-									  __DIR__.'/classes/mvc/views/site/backoffice/Translations.php',
-									  'mvc_router\mvc\View');
-
-	Dependency::add_custom_dependency('mvc_router\mvc\views\pizzygo\OurMission',
-									  'our_mission_pizzygo_view',
-									  __DIR__.'/classes/mvc/views/site/OurMission.php',
-									  'mvc_router\mvc\View');
-
-	Dependency::add_custom_dependency('mvc_router\data\gesture\pizzygo\managers\User',
-									  'pizzygo_user_manager',
-										__DIR__.'/classes/datas/managers/User.php',
-									  'mvc_router\data\gesture\Manager');
-
-	Dependency::add_custom_dependency('mvc_router\data\gesture\pizzygo\entities\User',
-									  'pizzygo_user_entity',
-									  __DIR__.'/classes/datas/entities/User.php',
-									  'mvc_router\data\gesture\Entity');
-
-	Dependency::add_custom_dependency('mvc_router\services\Password',
-									  'service_password',
-										__DIR__.'/classes/services/Password.php',
-									  'mvc_router\services\Service');
-
-
+	// parameters are arrays
+	Dependency::add_custom_dependencies(
+		[
+			'class'  => 'mvc_router\mvc\views\pizzygo\Loader',
+			'name'   => 'loader_pizzygo_view',
+			'file'   => __DIR__.'/classes/mvc/views/site/Loader.php',
+			'parent' => 'mvc_router\mvc\View'
+		],
+		[
+			'class'  => 'mvc_router\mvc\views\pizzygo\Home',
+			'name'   => 'home_pizzygo_view',
+			'file'   => __DIR__.'/classes/mvc/views/site/Home.php',
+			'parent' => 'mvc_router\mvc\View'
+		],
+		[
+			'class'  => 'mvc_router\mvc\views\pizzygo\api\Home',
+			'name'   => 'home_pizzygo_api_view',
+			'file'   => __DIR__.'/classes/mvc/views/api/Home.php',
+			'parent' => 'mvc_router\mvc\View'
+		],
+		[
+			'class'  => 'mvc_router\mvc\views\pizzygo\backoffice\Translations',
+			'name'   => 'translations_backoffice_pizzygo_view',
+			'file'   => __DIR__.'/classes/mvc/views/site/backoffice/Translations.php',
+			'parent' => 'mvc_router\mvc\View'
+		],
+		[
+			'class'  => 'mvc_router\mvc\views\pizzygo\OurMission',
+			'name'   => 'our_mission_pizzygo_view',
+			'file'   => __DIR__.'/classes/mvc/views/site/OurMission.php',
+			'parent' => 'mvc_router\mvc\View'
+		],
+		[
+			'class'  => 'mvc_router\data\gesture\pizzygo\managers\User',
+			'name'   => 'pizzygo_user_manager',
+			'file'   => __DIR__.'/classes/datas/managers/User.php',
+			'parent' => 'mvc_router\data\gesture\Manager'
+		],
+		[
+			'class'  => 'mvc_router\data\gesture\pizzygo\entities\User',
+			'name'   => 'pizzygo_user_entity',
+			'file'   => __DIR__.'/classes/datas/entities/User.php',
+			'parent' => 'mvc_router\data\gesture\Entity'
+		],
+		[
+			'class'  => 'mvc_router\services\Password',
+			'name'   => 'service_password',
+			'file'   => __DIR__.'/classes/services/Password.php',
+			'parent' => 'mvc_router\services\Service'
+		]
+	);
 	
 	// parameters are arrays
 	Conf::extend_confs(
