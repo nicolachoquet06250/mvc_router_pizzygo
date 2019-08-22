@@ -41,6 +41,47 @@
 		]
 	);
 
+	$data_gesture_classes = [];
+	$dw = Dependency::get_wrapper_factory()->get_dependency_wrapper();
+	$fs = $dw->get_service_fs();
+	$get_table_name = function ($path) {
+		$table_name = explode('/', $path)[count(explode('/', $path)) - 1];
+		return explode('.', $table_name)[0];
+	};
+	$fs->browse_dir(function ($path) use (&$data_gesture_classes, $dw, $get_table_name) {
+		$table_name = $get_table_name($path);
+		$class_name = $table_name;
+		preg_match_all('/[A-Z][a-z]+/', $table_name, $matches);
+		$matches = $dw->get_helpers()->array_flatten($matches);
+		$matches = array_map(function ($match) {
+			return strtolower($match);
+		}, $matches);
+		$table_name = implode('_', $matches);
+		$data_gesture_classes[] = [
+			'class' => 'mvc_router\data\gesture\pizzygo\entities\\'.$class_name,
+			'name' => 'pizzygo_'.$table_name.'_entity',
+			'file' => $path,
+			'parent' => 'mvc_router\data\gesture\Entity'
+		];
+	}, false, __DIR__.'/classes/datas/entities');
+
+	$fs->browse_dir(function ($path) use (&$data_gesture_classes, $dw, $get_table_name) {
+		$table_name = $get_table_name($path);
+		$class_name = $table_name;
+		preg_match_all('/[A-Z][a-z]+/', $table_name, $matches);
+		$matches = $dw->get_helpers()->array_flatten($matches);
+		$matches = array_map(function ($match) {
+			return strtolower($match);
+		}, $matches);
+		$table_name = implode('_', $matches);
+		$data_gesture_classes[] = [
+			'class' => 'mvc_router\data\gesture\pizzygo\managers\\'.$class_name,
+			'name' => 'pizzygo_'.$table_name.'_manager',
+			'file' => $path,
+			'parent' => 'mvc_router\data\gesture\Manager'
+		];
+	}, false, __DIR__.'/classes/datas/managers');
+
 	// parameters are arrays
 	Dependency::add_custom_dependencies(
 		[
@@ -74,23 +115,12 @@
 			'parent' => 'mvc_router\mvc\View'
 		],
 		[
-			'class'  => 'mvc_router\data\gesture\pizzygo\managers\User',
-			'name'   => 'pizzygo_user_manager',
-			'file'   => __DIR__.'/classes/datas/managers/User.php',
-			'parent' => 'mvc_router\data\gesture\Manager'
-		],
-		[
-			'class'  => 'mvc_router\data\gesture\pizzygo\entities\User',
-			'name'   => 'pizzygo_user_entity',
-			'file'   => __DIR__.'/classes/datas/entities/User.php',
-			'parent' => 'mvc_router\data\gesture\Entity'
-		],
-		[
 			'class'  => 'mvc_router\services\Password',
 			'name'   => 'service_password',
 			'file'   => __DIR__.'/classes/services/Password.php',
 			'parent' => 'mvc_router\services\Service'
-		]
+		],
+		...$data_gesture_classes
 	);
 	
 	// parameters are arrays

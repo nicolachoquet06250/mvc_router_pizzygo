@@ -22,6 +22,4 @@ use mvc_router\data\gesture\Manager;
  *
  * @package mvc_router\data\gesture\pizzygo\managers
  */
-class User extends Manager {
-	protected $entity_class = 'mvc_router\data\gesture\pizzygo\entities\User';
-}
+class User extends Manager {}

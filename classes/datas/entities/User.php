@@ -7,9 +7,6 @@ namespace mvc_router\data\gesture\pizzygo\entities;
 use mvc_router\data\gesture\Entity;
 
 class User extends Entity {
-
-	protected $manager_class = 'mvc_router\data\gesture\pizzygo\managers\User';
-
 	/**
 	 * @var int $id
 	 */
