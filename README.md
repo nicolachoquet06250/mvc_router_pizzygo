@@ -8,3 +8,5 @@ Différentes plateforms :
   - new platform: https://mvc-router.pizzygo.nicolaschoquet.fr/
   - old platform: https://pizzygo.nicolaschoquet.fr/
   - https://pizzygo.fr/
+  - repo core : https://github.com/nicolachoquet06250/dependency_injection_system.git
+  - repo pizzygo : https://github.com/nicolachoquet06250/mvc_router_pizzygo.git
