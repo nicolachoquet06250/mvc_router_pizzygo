@@ -4,9 +4,18 @@
 namespace mvc_router\confs\pizzygo;
 
 class Mysql extends \mvc_router\confs\Mysql {
-	protected $host = 'mysql-nicolas-choquet.alwaysdata.net';
-	protected $user = 143175;
-	protected $db_prefix = 'nicolas-choquet';
-	protected $db_name = 'pizzygo';
-	protected $pass = '2669NICOLAS2107';
+
+	public function before_construct() {
+		parent::before_construct();
+		$json = $this->inject->get_service_json();
+		$fs = $this->inject->get_service_fs();
+		$content = $json->decode($fs->read_file(__DIR__.'/../../classes/confs/mysql.json'), true);
+		if(isset($content['host']) && $content['host']) $this->host = $content['host'];
+		if(isset($content['user']) && $content['user']) $this->user = $content['user'];
+		if(isset($content['pass']) && $content['pass']) $this->pass = $content['pass'];
+		if(isset($content['user_prefix']) && $content['user_prefix']) $this->user_prefix = $content['user_prefix'];
+		if(isset($content['db_prefix']) && $content['db_prefix']) $this->db_prefix = $content['db_prefix'];
+		if(isset($content['db_name']) && $content['db_name']) $this->db_name = $content['db_name'];
+		if(isset($content['port']) && $content['port']) $this->port = $content['port'];
+	}
 }
