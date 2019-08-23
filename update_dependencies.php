@@ -64,7 +64,6 @@
 			'parent' => 'mvc_router\data\gesture\Entity'
 		];
 	}, false, __DIR__.'/classes/datas/entities');
-
 	$fs->browse_dir(function ($path) use (&$data_gesture_classes, $dw, $get_table_name) {
 		$table_name = $get_table_name($path);
 		$class_name = $table_name;
@@ -121,6 +120,29 @@
 			'parent' => 'mvc_router\services\Service'
 		],
 		...$data_gesture_classes
+	);
+
+	Dependency::extend_dependencies(
+		[
+			'class' => [
+				'old' => 'mvc_router\commands\TestCommand',
+				'new' => 'mvc_router\commands\core\TestCommand'
+			],
+			'name' => 'command_test',
+			'file' => __DIR__.'/classes/commands/TestCommand.php',
+			'parent' => 'mvc_router\commands\Command',
+			'type' => Dependency::NONE
+		],
+		[
+			'class' => [
+				'old' => 'mvc_router\commands\StartCommand',
+				'new' => 'mvc_router\commands\core\StartCommand'
+			],
+			'name' => 'command_start',
+			'file' => __DIR__.'/classes/commands/StartCommand.php',
+			'parent' => 'mvc_router\commands\Command',
+			'type' => Dependency::NONE
+		]
 	);
 	
 	// parameters are arrays
