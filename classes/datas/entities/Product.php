@@ -7,24 +7,45 @@ namespace mvc_router\data\gesture\pizzygo\entities;
 use mvc_router\data\gesture\Entity;
 
 class Product extends Entity {
-	/** @var int $id */
+	/**
+	 * @var int $id
+	 * @primary_key
+	 * @auto_increment
+	 */
 	protected $id;
 
-	/** @var string $name */
+	/**
+	 * @var string $name
+	 * @sql_type varchar
+	 */
 	protected $name;
 
-	/** @var int $category_id */
+	/**
+	 * @var int $category_id
+	 */
 	protected $category_id;
 
-	/** @var string $comment */
+	/**
+	 * @var string $comment
+	 * @sql_type text
+	 */
 	protected $comment;
 
-	/** @var string $image */
+	/**
+	 * @var string $image
+	 * @sql_type varchar
+	 */
 	protected $image;
 
-	/** @var string $image_alt */
+	/**
+	 * @var string $image_alt
+	 * @sql_type varchar
+	 */
 	protected $image_alt;
 
-	/** @var bool $background_dark */
+	/**
+	 * @var bool $background_dark
+	 * @sql_type tinyint
+	 */
 	protected $background_dark;
 }

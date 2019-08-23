@@ -7,15 +7,28 @@ namespace mvc_router\data\gesture\pizzygo\entities;
 use mvc_router\data\gesture\Entity;
 
 class Credential extends Entity {
-	/** @var int $id */
+	/**
+	 * @var int $id
+	 * @primary_key
+	 * @auto_increment
+	 */
 	protected $id;
 
-	/** @var string $type */
+	/**
+	 * @var string $type
+	 * @sql_type varchar
+	 */
 	protected $type;
 
-	/** @var string $login */
+	/**
+	 * @var string $login
+	 * @sql_type varchar
+	 */
 	protected $login;
 
-	/** @var string $password */
+	/**
+	 * @var string $password
+	 * @sql_type varchar
+	 */
 	protected $password;
 }
