@@ -128,7 +128,7 @@
 				'old' => 'mvc_router\commands\TestCommand',
 				'new' => 'mvc_router\commands\core\TestCommand'
 			],
-			'name' => 'command_test',
+			'name' => Dependency::TEST_COMMAND,
 			'file' => __DIR__.'/classes/commands/TestCommand.php',
 			'parent' => 'mvc_router\commands\Command',
 			'type' => Dependency::NONE
@@ -138,7 +138,7 @@
 				'old' => 'mvc_router\commands\StartCommand',
 				'new' => 'mvc_router\commands\core\StartCommand'
 			],
-			'name' => 'command_start',
+			'name' => Dependency::START_COMMAND,
 			'file' => __DIR__.'/classes/commands/StartCommand.php',
 			'parent' => 'mvc_router\commands\Command',
 			'type' => Dependency::NONE
@@ -152,7 +152,7 @@
 				'old' => 'mvc_router\confs\Mysql',
 				'new' => 'mvc_router\confs\pizzygo\Mysql'
 			],
-			'name' => 'mysql',
+			'name' => Conf::MYSQL,
 			'file' => __DIR__.'/classes/confs/Mysql.php',
 		]
 	);
