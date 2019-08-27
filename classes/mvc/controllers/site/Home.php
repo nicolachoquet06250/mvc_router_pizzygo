@@ -26,4 +26,11 @@ class Home extends Controller {
 		]);
 		return $view;
 	}
+
+	/**
+	 * @route /test/websocket
+	 */
+	public function test_websocket() {
+
+	}
 }

@@ -107,12 +107,25 @@
 			'parent' => 'mvc_router\mvc\View'
 		],
 		[
+			'class'  => 'mvc_router\mvc\views\pizzygo\TestWebsocket',
+			'name'   => 'test_websocket_view',
+			'file'   => __DIR__.'/classes/mvc/views/site/TestWebsocket.php',
+			'parent' => 'mvc_router\mvc\View'
+		],
+		[
 			'class'  => 'mvc_router\services\Password',
 			'name'   => 'service_password',
 			'file'   => __DIR__.'/classes/services/Password.php',
 			'parent' => 'mvc_router\services\Service'
 		],
 		...$data_gesture_classes
+	);
+	Dependency::add_custom_dependencies(
+		[
+			'class'  => 'mvc_router\websockets\controllers\pizzygo\MyChat',
+			'name'   => 'websocket_pizzygo_chat_controller',
+			'file'   => __DIR__.'/classes/websockets/controllers/MyChat.php'
+		]
 	);
 
 	Dependency::extend_dependencies(
