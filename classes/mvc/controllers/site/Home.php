@@ -5,6 +5,8 @@ namespace mvc_router\mvc\controllers\pizzygo;
 
 
 use mvc_router\mvc\Controller;
+use mvc_router\mvc\views\pizzygo\LoginPage;
+use mvc_router\mvc\views\pizzygo\TestWebsocket;
 use mvc_router\services\Trigger;
 
 class Home extends Controller {
@@ -29,8 +31,20 @@ class Home extends Controller {
 
 	/**
 	 * @route /test/websocket
+	 * @param TestWebsocket $testWebsocketView
+	 * @return TestWebsocket
 	 */
-	public function test_websocket() {
+	public function test_websocket(TestWebsocket $testWebsocketView) {
+		return $testWebsocketView;
+	}
 
+	/**
+	 * @http_method get
+	 * @route       /login
+	 * @param LoginPage $loginPage
+	 * @return LoginPage
+	 */
+	public function login(LoginPage $loginPage): LoginPage {
+		return $loginPage;
 	}
 }

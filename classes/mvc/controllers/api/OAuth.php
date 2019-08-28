@@ -4,6 +4,7 @@
 namespace mvc_router\mvc\controllers\pizzygo\api;
 
 
+use Firebase\JWT\JWT;
 use mvc_router\mvc\Controller;
 use mvc_router\router\Router;
 use mvc_router\services\Error;
@@ -12,16 +13,24 @@ use OAuthException;
 use ReflectionException;
 
 class OAuth extends Controller {
-	protected $req_url = '';
-	protected $auth_url = '';
-	protected $acc_url = '';
-	protected $api_url = '';
+	protected $req_url = '/oauth/request_token';
+	protected $auth_url = '/oauth/authorize';
+	protected $acc_url = '/oauth/access_token';
+	protected $api_url = '/api/home';
 
 	protected $consumer_key = 'nicolaschoquet06';
 	protected $consumer_secret = 'nicolaschoquet06';
 
+	protected $encrypt_algos = ['HS256'];
+	protected $iat = 1356999524;
+	protected $nbf = 1357000000;
+
+	/** @var \mvc_router\services\OAuth $authService */
+	public $authService;
+
 	/**
-	 * /login
+	 * @http_method post
+	 * @route /login-user
 	 *
 	 * @param Router  $router
 	 * @param Session $session
@@ -30,39 +39,60 @@ class OAuth extends Controller {
 	 * @throws ReflectionException
 	 */
 	public function login(Router $router, Session $session, Error $errors) {
-		if(!$router->get('oauth_token') && $session->get('state') == 1) $session->set('state', 0);
-		try {
-			$oauth = new \OAuth(
-				$this->consumer_key,
-				$this->consumer_secret,
-				OAUTH_SIG_METHOD_HMACSHA1,
-				OAUTH_AUTH_TYPE_URI
-			);
-			$oauth->enableDebug();
-			if(!$router->get('oauth_token') && !$session->get('state')) {
-				$request_token_info = $oauth->getRequestToken($this->req_url);
-				$session->set('secret', $request_token_info['oauth_token_secret']);
-				$session->set('state', 1);
-				return $errors->redirect302("{$this->auth_url}?oauth_token={$request_token_info['oauth_token']}");
-			} else if($session->get('state') === 1) {
-				$oauth->setToken($router->get('oauth_token'), $session->get('secret'));
-				$access_token_info = $oauth->getAccessToken($this->acc_url);
-				$session->set('state', 2);
-				$session->set('token', $access_token_info['oauth_token']);
-				$session->set('secret', $access_token_info['oauth_token_secret']);
+		if(!$router->get('oauth_token') && $session->get('state') === 1) $session->set('state', 0);
+		$userManager = $this->inject->get_pizzygo_user_manager();
+		if(!$session->get('state')) {
+			$user = null;
+			if ($router->post('email') && $router->post('password')) {
+				$user = $userManager->get_all_from_email_password($router->post('email'), sha1($router->post('password')));
+			} elseif ($router->post('pseudo') && $router->get('password')) {
+				$user = $userManager->get_all_from_pseudo_password($router->post('pseudo'), sha1($router->post('password')));
 			}
-			$oauth->setToken($session->get('token'), $session->get('secret'));
-			$oauth->fetch("{$this->api_url}/user.json");
-			return $this->json($oauth->getLastResponse());
-		} catch(OAuthException $e) {
-			return $errors->error400($e->getMessage());
+			if ($user) {
+				$url = $router->get_base_url();
+				$token = [
+					"iss"  => $url,
+					"aud"  => $url,
+					"iat"  => $this->iat,
+					"nbf"  => $this->nbf,
+					"data" => [
+						"id"        => $user->get('id'),
+						"firstname" => $user->get('first_name'),
+						"lastname"  => $user->get('last_name'),
+						"email"     => $user->get('email')
+					]
+				];
+				$session->set('jwt', JWT::encode($token, $this->consumer_key, $this->encrypt_algos));
+				return $this->json(
+					[
+						"message" => "Successful login.",
+						"jwt"     => $session->get('jwt'),
+					]
+				);
+			}
+			$errors->error401('Access denied !', Error::JSON);
 		}
+		$jwt = $router->get('oauth_token');
+		$jwt = JWT::decode($jwt, $this->consumer_key, $this->encrypt_algos);
+		$userInfos = $jwt->data;
+		$user = $userManager->get_all_from_id($userInfos->id);
+		if($user) {
+			return $this->json(
+				[
+					'id' => $user->get('id'),
+					'jwt' => JWT::encode($jwt, $this->consumer_key, $this->encrypt_algos),
+				]
+			);
+		}
+		$errors->error401('Access denied !', Error::JSON);
 	}
 
 	/**
 	 * @route /oauth/request_token
 	 */
-	public function request_token() {}
+	public function request_token() {
+		$this->authService->get_access_token();
+	}
 
 	/**
 	 * @route /oauth/authorize

@@ -31,6 +31,11 @@
 			'class' => 'mvc_router\mvc\controllers\pizzygo\OurMission',
 			'name' => 'our_mission_pizzygo_controller',
 			'file' => __DIR__.'/classes/mvc/controllers/site/OurMission.php'
+		],
+		[
+			'class' => 'mvc_router\mvc\controllers\pizzygo\api\OAuth',
+			'name' => 'auth_pizzygo_controller',
+			'file' => __DIR__.'/classes/mvc/controllers/api/OAuth.php'
 		]
 	);
 
@@ -113,13 +118,24 @@
 			'parent' => 'mvc_router\mvc\View'
 		],
 		[
+			'class'  => 'mvc_router\mvc\views\pizzygo\LoginPage',
+			'name'   => 'login_page_view',
+			'file'   => __DIR__.'/classes/mvc/views/site/LoginPage.php',
+			'parent' => 'mvc_router\mvc\View'
+		]
+	);
+
+	Dependency::add_custom_dependencies(
+		[
 			'class'  => 'mvc_router\services\Password',
 			'name'   => 'service_password',
 			'file'   => __DIR__.'/classes/services/Password.php',
 			'parent' => 'mvc_router\services\Service'
-		],
-		...$data_gesture_classes
+		]
 	);
+
+	Dependency::add_custom_dependencies(...$data_gesture_classes);
+
 	Dependency::add_custom_dependencies(
 		[
 			'class'  => 'mvc_router\websockets\controllers\pizzygo\MyChat',
