@@ -131,6 +131,12 @@
 			'name'   => 'service_password',
 			'file'   => __DIR__.'/classes/services/Password.php',
 			'parent' => 'mvc_router\services\Service'
+		],
+		[
+			'class'  => 'mvc_router\services\OAuth',
+			'name'   => 'service_oauth',
+			'file'   => __DIR__.'/classes/services/OAuth.php',
+			'parent' => 'mvc_router\services\Service',
 		]
 	);
 
