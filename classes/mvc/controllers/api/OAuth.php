@@ -8,6 +8,7 @@ use Firebase\JWT\JWT;
 use mvc_router\mvc\Controller;
 use mvc_router\router\Router;
 use mvc_router\services\Error;
+use mvc_router\services\Password;
 use mvc_router\services\Session;
 use OAuthException;
 use ReflectionException;
@@ -21,7 +22,6 @@ class OAuth extends Controller {
 	protected $consumer_key = 'nicolaschoquet06';
 	protected $consumer_secret = 'nicolaschoquet06';
 
-	protected $encrypt_algos = ['HS256'];
 	protected $iat = 1356999524;
 	protected $nbf = 1357000000;
 
@@ -30,25 +30,26 @@ class OAuth extends Controller {
 
 	/**
 	 * @http_method post
-	 * @route /login-user
+	 * @route       /login-user
 	 *
-	 * @param Router  $router
-	 * @param Session $session
-	 * @param Error   $errors
+	 * @param Router   $router
+	 * @param Session  $session
+	 * @param Error    $errors
+	 * @param Password $passwordService
 	 * @return false|string|void
 	 * @throws ReflectionException
 	 */
-	public function login(Router $router, Session $session, Error $errors) {
+	public function login(Router $router, Session $session, Error $errors, Password $passwordService) {
 		if(!$router->get('oauth_token') && $session->get('state') === 1) $session->set('state', 0);
 		$userManager = $this->inject->get_pizzygo_user_manager();
 		if(!$session->get('state')) {
 			$user = null;
 			if ($router->post('email') && $router->post('password')) {
-				$user = $userManager->get_all_from_email_password($router->post('email'), sha1($router->post('password')));
-			} elseif ($router->post('pseudo') && $router->get('password')) {
-				$user = $userManager->get_all_from_pseudo_password($router->post('pseudo'), sha1($router->post('password')));
+				$user = $userManager->get_all_from_email($router->post('email'));
+			} elseif ($router->post('pseudo') && $router->post('password')) {
+				$user = $userManager->get_all_from_pseudo($router->post('pseudo'));
 			}
-			if ($user) {
+			if ($user && $passwordService->is_valid($router->post('password'), $user->get('password'))) {
 				$url = $router->get_base_url();
 				$token = [
 					"iss"  => $url,
@@ -62,7 +63,7 @@ class OAuth extends Controller {
 						"email"     => $user->get('email')
 					]
 				];
-				$session->set('jwt', JWT::encode($token, $this->consumer_key, $this->encrypt_algos));
+				$session->set('jwt', JWT::encode($token, $this->consumer_key));
 				return $this->json(
 					[
 						"message" => "Successful login.",
@@ -73,18 +74,33 @@ class OAuth extends Controller {
 			$errors->error401('Access denied !', Error::JSON);
 		}
 		$jwt = $router->get('oauth_token');
-		$jwt = JWT::decode($jwt, $this->consumer_key, $this->encrypt_algos);
+		$jwt = JWT::decode($jwt, $this->consumer_key);
 		$userInfos = $jwt->data;
 		$user = $userManager->get_all_from_id($userInfos->id);
 		if($user) {
 			return $this->json(
 				[
 					'id' => $user->get('id'),
-					'jwt' => JWT::encode($jwt, $this->consumer_key, $this->encrypt_algos),
+					'jwt' => JWT::encode($jwt, $this->consumer_key),
 				]
 			);
 		}
 		$errors->error401('Access denied !', Error::JSON);
+	}
+
+	/**
+	 * @http_method   get
+	 * @route         /logout-user
+	 * @param Router  $router
+	 * @param Session $session
+	 * @param Error   $errors
+	 */
+	public function logout(Router $router, Session $session, Error $errors) {
+		$session->unset('jwt')
+			? $errors->redirect301(
+				($router->get('referer')
+					? $router->get('referer') : $router->get_base_url().'?lo=1'))
+				: $errors->redirect301($router->get_base_url().'?lo=0');
 	}
 
 	/**
