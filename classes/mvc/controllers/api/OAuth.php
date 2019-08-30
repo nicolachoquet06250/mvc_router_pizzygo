@@ -51,8 +51,7 @@ class OAuth extends Controller {
 	}
 
 	/**
-	 * @http_method   get
-	 * @route         /logout-user
+	 * @route         /oauth/logout
 	 * @param Router  $router
 	 * @param Session $session
 	 * @param Error   $errors
@@ -63,6 +62,52 @@ class OAuth extends Controller {
 				($router->get('referer')
 					? $router->get('referer') : $router->get_base_url().'?lo=1'))
 				: $errors->redirect301($router->get_base_url().'?lo=0');
+	}
+
+	/**
+	 * @route /oauth/logout-api
+	 * @param Router  $router
+	 * @param Session $session
+	 * @param Error   $errors
+	 * @return false|string
+	 */
+	public function logout_api(Router $router, Session $session, Error $errors) {
+		return $this->json(
+			[
+				'disconnected' => $session->unset('jwt'),
+			]
+		);
+	}
+
+	/**
+	 * @route /oauth/connected
+	 * @param \mvc_router\services\OAuth $authService
+	 * @return false|string
+	 */
+	public function connected(\mvc_router\services\OAuth $authService) {
+		return $this->json(
+			[
+				'logged' => $authService->is_connected()
+			]
+		);
+	}
+
+	/**
+	 * @route /oauth/user
+	 * @param \mvc_router\services\OAuth $authService
+	 * @return false|string
+	 * @throws Exception401
+	 */
+	public function get_current_user(\mvc_router\services\OAuth $authService) {
+		if($authService->is_connected()) {
+			return $this->json(
+				   [
+				   		'error' => false,
+						'user' => $authService->user()->to_json()
+				   ]
+			);
+		}
+		throw new Exception401("Vous n'êtes pas connecté !", 0, Error::JSON);
 	}
 
 	/**

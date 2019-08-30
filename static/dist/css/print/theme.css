@@ -1,0 +1,10 @@
+#pizzygo-all-order-modal {
+	position: fixed!important;
+	top: 0!important;
+	left: 0!important;
+	right: 0!important;
+	bottom: 0!important;
+}
+#pizzygo-all-order-modal .modal-footer {
+	display: none!important;
+}

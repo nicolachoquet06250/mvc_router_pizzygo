@@ -41,7 +41,7 @@ let callbacks = {
 		Login.disconnect(disconnected => callbacks.disconnect(disconnected, current_page));
 	},
 	pizzygo_login: (status, user, current_page) => {
-		if(status) {
+		if(!status) {
 			let roles = [];
 			for(let i in user.roles) {
 				roles[i] = user.roles[i].role;
@@ -76,7 +76,7 @@ let callbacks = {
                             </div>
                             ${utils.functions.in_array(RolesEnum.ROLE_VENDOR, roles) ? '' : `<ul id='pizzygo-dashboard-dropdown' class='dropdown-content'>
                                 <li id="pizzygo-tab-account-click">
-                                    <a class="orange-text" href="/dashboard/me?account">Mon compte</a>
+                                    <a class="orange-text" href="/dashboard/customer">Mon compte</a>
                                 </li>
                                 <li>
                                     <a class="orange-text pizzygo-menu-bar-disconnect" href="#">Déconnexion</a>
@@ -107,7 +107,7 @@ let callbacks = {
                             </div>
                             ${utils.functions.in_array(RolesEnum.ROLE_VENDOR, roles) ? '' : `<ul id='pizzygo-dashboard-dropdown-mobile' class='dropdown-content'>
                                 <li id="pizzygo-tab-account-click">
-                                    <a class="orange-text" href="/dashboard/me?account">Mon compte</a>
+                                    <a class="orange-text" href="/dashboard/customer">Mon compte</a>
                                 </li>
                                 <li>
                                     <a class="orange-text pizzygo-menu-bar-disconnect" href="#">Déconnexion</a>

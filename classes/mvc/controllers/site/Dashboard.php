@@ -10,15 +10,18 @@ use mvc_router\services\OAuth;
 use mvc_router\services\UrlGenerator;
 
 class Dashboard extends Controller {
+
 	/**
-	 * @route /dashboard/me
+	 * @route \/dashboard\/(?<role>customer|admin|vendor|me)
 	 * @param OAuth                                   $authService
 	 * @param Error                                   $errors
 	 * @param \mvc_router\mvc\views\pizzygo\Dashboard $dashboardView
 	 * @param UrlGenerator                            $urlGenerator
 	 * @return \mvc_router\mvc\views\pizzygo\Dashboard
 	 */
-	public function index(OAuth $authService, Error $errors, \mvc_router\mvc\views\pizzygo\Dashboard $dashboardView, UrlGenerator $urlGenerator) {
+	public function index(OAuth $authService, Error $errors,
+						  \mvc_router\mvc\views\pizzygo\Dashboard $dashboardView,
+						  UrlGenerator $urlGenerator) {
 		$logo_base = 'https://pizzygo.fr/wp-content/uploads/2018/11/cropped-favicon-1-';
 		$dashboardView->assign('logo', [
 			'32x32' => $logo_base.'32x32.png',
@@ -26,6 +29,7 @@ class Dashboard extends Controller {
 			'192x192' => $logo_base.'192x192.png',
 			'270x270' => $logo_base.'270x270.png',
 		]);
+		$dashboardView->assign('role', $this->param('role'));
 		if($authService->is_connected()) {
 			$user = $authService->user();
 			$dashboardView->assign('user', $user);

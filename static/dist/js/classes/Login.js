@@ -8,8 +8,7 @@ class Login {
 				email: email,
 				password: password
 			})
-		})
-			.then(r => r.json())
+		}).then(r => r.json())
 			.then(json => callback(json.status, (json.status ? json.user : json.message)))
 			.catch(reason => {
 				if(fail !== null) fail(reason);
@@ -17,32 +16,32 @@ class Login {
 	}
 
 	static disconnect(callback, fail = null) {
-		let request = $.ajax({
-			url: `${CONSTANT.urls.ws}/login/disconnect`,
-			method: 'GET'
-		}).done(data => callback(data.disconnected));
-		if(fail !== null) {
-			request.fail(fail);
-		}
+		fetch(`/oauth/logout-api`, {
+			method: 'get'
+		}).then(r => r.json())
+			.then(json => callback(json.disconnected))
+			.catch(e => {
+				if(fail !== null) fail(e);
+			});
 	}
 
 	static get_connected_user(callback, fail = null) {
-		let request = $.ajax({
-			url: `${CONSTANT.urls.ws}/login/logged_user`,
-			method: 'GET'
-		}).done(data => callback(data.status, (data.status ? data.user : data.message)));
-		if(fail !== null) {
-			request.fail(fail);
-		}
+		fetch(`/oauth/user`, {
+			method: 'get'
+		}).then(r => r.json())
+			.then(json => callback(json.error, (!json.error ? json.user : json.message)))
+			.catch(e => {
+				if(fail !== null) fail(e);
+			});
 	}
 
 	static logged(callback, fail = null) {
-		let request = $.ajax({
-			url: `${CONSTANT.urls.ws}/login/logged`,
-			method: 'GET'
-		}).done(data => callback(data.logged));
-		if(fail !== null) {
-			request.fail(fail);
-		}
+		fetch(`/oauth/connected`, {
+			method: 'get'
+		}).then(r => r.json())
+			.then(json => callback(json.logged))
+			.catch(e => {
+				if(fail !== null) fail(e);
+			});
 	}
 }
