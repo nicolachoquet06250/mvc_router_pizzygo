@@ -37,14 +37,14 @@ class LoginPage extends View {
 		</head>
 		<body>
 			<h2>From email</h2>
-			<form method='post' action='/login-user'>
+			<form method='post' action='/oauth/login'>
 				<input type='email' name='email' placeholder='Email' /><br>
 				<input type='password' name='password' placeholder='Password' /><br>
 				<input type='submit' value='Submit' />
 			</form>
 			
 			<h2>From pseudo</h2>
-			<form method='post' action='/login-user'>
+			<form method='post' action='/oauth/login'>
 				<input type='text' name='pseudo' placeholder='Pseudo' /><br>
 				<input type='password' name='password' placeholder='Password' /><br>
 				<input type='submit' value='Submit' />

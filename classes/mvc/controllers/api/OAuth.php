@@ -9,26 +9,24 @@ use mvc_router\http\errors\Exception401;
 use mvc_router\mvc\Controller;
 use mvc_router\router\Router;
 use mvc_router\services\Error;
-use mvc_router\services\Password;
+use mvc_router\services\Json;
 use mvc_router\services\Session;
 use ReflectionException;
 
 class OAuth extends Controller {
 	/**
 	 * @http_method post
-	 * @route       /login-user
+	 * @route       /oauth/login
 	 *
 	 * @param Router                     $router
-	 * @param Session                    $session
-	 * @param Error                      $errors
-	 * @param Password                   $passwordService
 	 * @param User                       $userManager
 	 * @param \mvc_router\services\OAuth $authService
+	 * @param Json                       $jsonService
 	 * @return false|string|void
-	 * @throws ReflectionException
 	 * @throws Exception401
+	 * @throws ReflectionException
 	 */
-	public function login(Router $router, User $userManager, \mvc_router\services\OAuth $authService) {
+	public function login(Router $router, User $userManager, \mvc_router\services\OAuth $authService, Json $jsonService) {
 		if(!$authService->is_connected()) {
 			$user = null;
 			if ($router->post('email') && $router->post('password')) {
@@ -42,7 +40,9 @@ class OAuth extends Controller {
 		if($user) {
 			return $this->json(
 				[
+					'status' => 'success',
 					'id' => $user->get('id'),
+					'user' => $user->to_json(),
 					'jwt' => $authService->get_access_token(),
 				]
 			);

@@ -47,7 +47,7 @@ let callbacks = {
 				roles[i] = user.roles[i].role;
 			}
 			let trigger = (utils.functions.in_array(RolesEnum.ROLE_VENDOR, roles) ? 'sidenav' : 'dropdown') + '-trigger';
-			let complete_name = user.name + ' ' + user.surname;
+			let complete_name = user.first_name + ' ' + user.last_name;
 			let target = utils.functions.in_array(RolesEnum.ROLE_VENDOR, roles) ? 'pizzygo-account-menu' : 'pizzygo-dashboard-dropdown';
 			let profil_image = user.profil_img !== '' ? CONSTANT.urls.ws.replace('/index.php', '') + user.profil_img : 'https://materializecss.com/images/yuna.jpg';
 
@@ -76,7 +76,7 @@ let callbacks = {
                             </div>
                             ${utils.functions.in_array(RolesEnum.ROLE_VENDOR, roles) ? '' : `<ul id='pizzygo-dashboard-dropdown' class='dropdown-content'>
                                 <li id="pizzygo-tab-account-click">
-                                    <a class="orange-text" href="/dashboard/customer.html?account">Mon compte</a>
+                                    <a class="orange-text" href="/dashboard/me?account">Mon compte</a>
                                 </li>
                                 <li>
                                     <a class="orange-text pizzygo-menu-bar-disconnect" href="#">Déconnexion</a>
@@ -107,7 +107,7 @@ let callbacks = {
                             </div>
                             ${utils.functions.in_array(RolesEnum.ROLE_VENDOR, roles) ? '' : `<ul id='pizzygo-dashboard-dropdown-mobile' class='dropdown-content'>
                                 <li id="pizzygo-tab-account-click">
-                                    <a class="orange-text" href="/dashboard/customer.html?account">Mon compte</a>
+                                    <a class="orange-text" href="/dashboard/me?account">Mon compte</a>
                                 </li>
                                 <li>
                                     <a class="orange-text pizzygo-menu-bar-disconnect" href="#">Déconnexion</a>
@@ -358,10 +358,11 @@ let pizzygo = {
 	},
 	connection: (e, current_page) => {
 		e.preventDefault();
-		let email = $('#pizzygo-modal-connection #pizzygo-connection-email').val();
-		let password = $('#pizzygo-modal-connection #pizzygo-connection-password').val();
-
-		Login.login(email, password, (status, user) => callbacks.pizzygo_login(status, user, current_page));
+		Login.login(
+			$('#pizzygo-modal-connection #pizzygo-connection-email').val(),
+			$('#pizzygo-modal-connection #pizzygo-connection-password').val(),
+			(status, user) => callbacks.pizzygo_login(status, user, current_page)
+		);
 	},
 	search_motor: () => {
 		$('#pizzygo-search_motor').focusin(elem => {

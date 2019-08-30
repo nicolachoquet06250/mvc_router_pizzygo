@@ -2,17 +2,18 @@
 
 class Login {
 	static login(email, password, callback, fail = null) {
-		let request = $.ajax({
-			url: `${CONSTANT.urls.ws}/login`,
-			method: 'GET',
-			data: {
+		fetch(`oauth/login`, {
+			method: 'post',
+			body: JSON.stringify({
 				email: email,
 				password: password
-			}
-		}).done(data => callback(data.status, (data.status ? data.user : data.message)));
-		if(fail !== null) {
-			request.fail(fail);
-		}
+			})
+		})
+			.then(r => r.json())
+			.then(json => callback(json.status, (json.status ? json.user : json.message)))
+			.catch(reason => {
+				if(fail !== null) fail(reason);
+			});
 	}
 
 	static disconnect(callback, fail = null) {

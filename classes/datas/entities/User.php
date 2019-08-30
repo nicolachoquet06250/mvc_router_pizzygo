@@ -108,4 +108,35 @@ class User extends Entity {
 	 * @sql_type varchar
 	 */
 	protected $local_access_token;
+
+	/**
+	 * @var string $role
+	 */
+	protected $role;
+
+	/**
+	 * @inheritDoc
+	 */
+	public function to_json() {
+		$json = parent::to_json();
+		unset($json['password']);
+		$json['role'] = $this->get('role');
+		return $json;
+	}
+
+	public function get($key) {
+		switch ($key) {
+			case 'role':
+				if(!$this->id) {
+					return '';
+				}
+				$user_role = $this->inject->get_pizzygo_role_manager()->get_all_from_userid($this->id);
+				if(empty($user_role)) {
+					return '';
+				}
+				return $user_role->get('role');
+			default:
+				return parent::get($key);
+		}
+	}
 }

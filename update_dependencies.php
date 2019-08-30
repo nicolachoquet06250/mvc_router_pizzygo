@@ -36,6 +36,11 @@
 			'class' => 'mvc_router\mvc\controllers\pizzygo\api\OAuth',
 			'name' => 'auth_pizzygo_controller',
 			'file' => __DIR__.'/classes/mvc/controllers/api/OAuth.php'
+		],
+		[
+			'class' => 'mvc_router\mvc\controllers\pizzygo\Dashboard',
+			'name' => 'dashboard_pizzygo_controller',
+			'file' => __DIR__.'/classes/mvc/controllers/site/Dashboard.php'
 		]
 	);
 
@@ -121,6 +126,12 @@
 			'class'  => 'mvc_router\mvc\views\pizzygo\LoginPage',
 			'name'   => 'login_page_view',
 			'file'   => __DIR__.'/classes/mvc/views/site/LoginPage.php',
+			'parent' => 'mvc_router\mvc\View'
+		],
+		[
+			'class'  => 'mvc_router\mvc\views\pizzygo\Dashboard',
+			'name'   => 'dashboard_view',
+			'file'   => __DIR__.'/classes/mvc/views/site/Dashboard.php',
 			'parent' => 'mvc_router\mvc\View'
 		]
 	);
